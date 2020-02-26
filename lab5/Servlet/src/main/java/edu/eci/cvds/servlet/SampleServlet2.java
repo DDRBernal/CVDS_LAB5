@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(
-    urlPatterns = "/Loquequiera"
+    urlPatterns = "/servlet2"
 )
 public class SampleServlet2 extends HttpServlet{
     static final long serialVersionUID = 35L;
@@ -30,10 +30,10 @@ public class SampleServlet2 extends HttpServlet{
 			if (todo!=null){
 				int ID = Integer.parseInt(id);
 				Todo todo = Service.getTodo(ID);
-				resp.setStatus(HttpServletResponse.SC_OK);
 				todolist.add(todo);
 				responseWriter.write(Service.todosToHTMLTable(todolist));
 				responseWriter.flush();
+				resp.setStatus(HttpServletResponse.SC_OK);
 			}else{
 				resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
 				
