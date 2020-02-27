@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <h:form id="guess_form">
+            
+            <h3>Inserte un numero</h3>
+            <p:inputText numero="intento" value="#{guessBean.numeroIntentado}"> </p:inputText>
+			
+			<h3>Numero a Adivinar</h3>
+            <p:outputLabel value="#{guessBean.numeroAdivinar}"></p:outputLabel>
+            
+			<h3>Puntaje</h3>
+            <p:outputLabel value="#{guessBean.puntaje}"></p:outputLabel>
+			
+            <h3>Numero de intentos</h3>
+            <p:outputLabel value="#{guessBean.numIntentos}"></p:outputLabel>
+            <h3></h3>
+            <p:commandButton 
+				value ="Adivinar" update="guess_form" actionListener="#{guessBean.guess}"></p:commandButton>
+            <p:commandButton value="Nuevo" update="guess_form" actionListener="#{guessBean.restart}"></p:commandButton>
+            
+        </h:form>
+    </h:body>
+</html>

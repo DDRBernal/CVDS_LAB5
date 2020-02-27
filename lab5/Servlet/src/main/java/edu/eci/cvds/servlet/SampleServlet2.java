@@ -45,7 +45,30 @@ public class SampleServlet2 extends HttpServlet{
 			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
         //resp.setStatus(HttpServletResponse.SC_OK);
-        //responseWriter.write("id: " + id );
-        
+        //responseWriter.write("id: " + id );    
    }
+   
+   @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		try{
+			Writer responseWriter = resp.getWriter();
+			Optional<String> optId = Optional.ofNullable(req.getParameter("ID"));
+			String ID2 = optId.isPresent() && !optId.get().isEmpty() ? optId.get() : "";
+			int ID = Integer.parseInt(ID2);
+			Todo todo = Service.getTodo(ID);
+			if (todo!=null){
+				todolist.add(todo);
+				responseWriter.write(Service.todosToHTMLTable(todolist));
+				responseWriter.flush();
+				resp.setStatus(HttpServletResponse.SC_OK);
+			}else{
+				resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			}
+		}catch (MalformedURLException e){
+			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		}catch (NumberFormatException | IOException e){
+			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		}
+	}
 }
