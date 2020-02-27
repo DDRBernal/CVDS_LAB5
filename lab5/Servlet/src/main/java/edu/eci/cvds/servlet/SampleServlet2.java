@@ -2,6 +2,7 @@ package edu.eci.cvds.servlet;
 
 import edu.eci.cvds.servlet.model.*;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.io.Writer;
 import java.util.Optional;
 import javax.servlet.ServletException;
@@ -22,14 +23,14 @@ public class SampleServlet2 extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Writer responseWriter = resp.getWriter();
-		Optional<String> optName = Optional.ofNullable(req.getParameter("id"));
-        String id = optName.isPresent() && !optName.get().isEmpty() ? optName.get() : "";
-	    
+		
 		try{
+			Writer responseWriter = resp.getWriter();
+			Optional<String> optName = Optional.ofNullable(req.getParameter("id"));
+			String id = optName.isPresent() && !optName.get().isEmpty() ? optName.get() : "";
+			int ID = Integer.parseInt(id);
+			Todo todo = Service.getTodo(ID);
 			if (todo!=null){
-				int ID = Integer.parseInt(id);
-				Todo todo = Service.getTodo(ID);
 				todolist.add(todo);
 				responseWriter.write(Service.todosToHTMLTable(todolist));
 				responseWriter.flush();
@@ -38,10 +39,10 @@ public class SampleServlet2 extends HttpServlet{
 				resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
 				
 			}
-		}catch (NumberFormatException | IOException e){
-			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}catch (MalformedURLException e){
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		}catch (NumberFormatException | IOException e){
+			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
         //resp.setStatus(HttpServletResponse.SC_OK);
         //responseWriter.write("id: " + id );

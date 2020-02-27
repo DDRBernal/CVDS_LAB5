@@ -5,13 +5,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>edu.eci.cvds</groupId>
-  <artifactId>maven-archtype-webappp</artifactId>
+  <artifactId>Servlet</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>maven-archtype-webappp Maven Webapp</name>
+  <name>Servlet Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,6 +20,12 @@
   </properties>
 
   <dependencies>
+  <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -128,6 +134,7 @@
                <path>/</path>
            </configuration>
        </plugin>
-   </plugins>	
+   </plugins>
+   
   </build>
 </project>
